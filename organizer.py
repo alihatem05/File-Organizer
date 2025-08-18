@@ -2,11 +2,13 @@ from settings import CONFIGS, logging
 from pathlib import Path
 import shutil
 import setup
+from csv_maker import setup_csv
 
 def organizer():
     setup.setup()
     read_files()
     logging.debug(f"********ORGANIZING COMPLETED********")
+    setup_csv()
 
 def read_files():
     logging.debug(f"********READ_FILES INITIALIZED********")
@@ -36,7 +38,7 @@ def categorize(file):
 def move_file(file, category):
     OUT_PATH = Path(CONFIGS["output-path"]) / category / file.name
     shutil.move(file, OUT_PATH)
-    logging.info(f"{file} moved to {category}")
+    logging.info(f"{file.name} moved to {category}")
 
 
 organizer()
